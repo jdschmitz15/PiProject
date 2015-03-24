@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from temphumidity.views import HTDataList, HTDataDetail
+from temphumidity.views import HTDataList, HTDataDetail, HTDataTodayList
 
 urlpatterns = patterns('',
     # Examples:
@@ -11,6 +11,7 @@ urlpatterns = patterns('',
  #   url(r'^temphumidity/$', 'temphumidity.views.index'),
  #   url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url( r'^htdata/$', HTDataList.as_view(), name = 'data_list' ),
+    url( r'^htdata/today/$', HTDataTodayList.as_view(), name = 'data_today_list' ),
     url( r'^htdata/(?P<pk>[0-9]+)$', HTDataDetail.as_view(), name = 'data_detail' ),
 
 )

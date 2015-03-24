@@ -1,12 +1,9 @@
 
 from temphumidity.models import HTData
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework.generics import (
 ListCreateAPIView, RetrieveUpdateDestroyAPIView )
 from serializers import HTDataSerializer
-
+from datetime import datetime, timedelta
 
 
 class HTDataMixin(object):
@@ -16,6 +13,16 @@ class HTDataMixin(object):
     """
     queryset = HTData.objects.all()
     serializer_class = HTDataSerializer
+
+class HTDataTodayList(ListCreateAPIView):
+    """
+    Return a list of all the tasks, or
+    create new ones
+    """
+    today = datetime.today()
+    queryset = HTData.objects.filter(date__year=today.year, date__month=today.month,date__day=today.day)
+    serializer_class = HTDataSerializer
+
 
 class HTDataList(HTDataMixin, ListCreateAPIView):
     """
@@ -29,3 +36,4 @@ class HTDataDetail(HTDataMixin, RetrieveUpdateDestroyAPIView):
     Return a specific task, update it, or delete it.
     """
     pass
+
