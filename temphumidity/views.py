@@ -22,6 +22,15 @@ class HTDataTodayList(ListCreateAPIView):
     queryset = HTData.objects.filter(date__year=today.year, date__month=today.month,date__day=today.day)
     serializer_class = HTDataSerializer
 
+class HTDataWeekList(ListCreateAPIView):
+    """
+    Return a list of all the tasks, or
+    create new ones
+    """
+    startdate = datetime.today()
+    enddate = startdate - timedelta(days=6)
+    queryset = HTData.objects.filter(date__range=[ enddate,startdate])
+    serializer_class = HTDataSerializer
 
 class HTDataList(HTDataMixin, ListCreateAPIView):
     """
