@@ -1,7 +1,6 @@
 
 from temphumidity.models import HTData
-from rest_framework.generics import (
-ListCreateAPIView, RetrieveUpdateDestroyAPIView )
+from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView )
 from serializers import HTDataSerializer
 from datetime import datetime, timedelta
 
